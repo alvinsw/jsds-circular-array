@@ -1,0 +1,25 @@
+{
+  "name": "jsds-circular-array",
+  "version": "1.0.0",
+  "description": "Circular array implementation for JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/alvinsw/jsds-circular-array.git"
+  },
+  "keywords": [
+    "circular",
+    "array",
+    "circular",
+    "buffer"
+  ],
+  "author": "Alvin Sebastian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alvinsw/jsds-circular-array/issues"
+  },
+  "homepage": "https://github.com/alvinsw/jsds-circular-array#readme"
+}
