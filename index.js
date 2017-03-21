@@ -1,13 +1,14 @@
 'use strict';
 
 module.exports = CircularArray;
+
 /**
  * @params opt length or array
  * If array is given, the CircularArray will assume the max size of that array.
  **/
 function CircularArray(opt) {
   if (!(this instanceof CircularArray)) return new CircularArray(opt);
-  
+
   if (typeof opt === 'number') {
     this._data = new Array(opt);
     this._size = 0;
@@ -18,16 +19,16 @@ function CircularArray(opt) {
     throw new TypeError('Invalid or missing argument: needs a valid array size or a non-empty array');
   }
   this._start = 0;
-  
-};
+
+}
 
 var proto = CircularArray.prototype;
 
 Object.defineProperty(proto, 'size', { enumerable: true, get : function () { return this._size } });
 
 /** The length of the backing array, this is the maximum capacity of this Circular Array **/
-Object.defineProperty(proto, 'length', { enumerable: true, 
-  get : function () { 
+Object.defineProperty(proto, 'length', { enumerable: true,
+  get : function () {
     return this._data.length;
   },
   /** Set the maximum capacity of this Circular Array, same as calling reserve(val) **/
@@ -84,7 +85,7 @@ proto.unshift = function() {
   for ( ; i >= 0; i--) {
     this._data[--pos] = arguments[i];
   }
-  
+
   // recalculate size
   if (this._size < length) {
     this._size += alen;
@@ -127,14 +128,27 @@ proto.reserve = function(size) {
 
 /** O(1) */
 proto.get = function (index) {
-  if (index >= this._size) return;
-  else return this._data[(this._start + index) % this._data.length];
+  if (index < this._size && index >= 0) {
+    return this._data[(this._start + index) % this._data.length];
+  }
 };
 
-/** This method is provided for inspection/convenience only. It cannot be used to insert new element and it does not increase the collection size. O(1)**/
+/**
+ * This method is provided for inspection/convenience only.
+ * It cannot be used to insert new element and it does not increase the collection size.
+ * O(1)
+ **/
 proto.set = function (index, value) {
   if (index >= this._size) throw new TypeError('Index out of bound');
   else this._data[(this._start + index) % this._data.length] = value;
+};
+
+proto.first = function () {
+  return this.get(0);
+};
+
+proto.last = function () {
+  return this.get(this._size - 1);
 };
 
 proto.isEmpty = function () {

@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Circular array implementation for JavaScript",
   "main": "index.js",
+  "devDependencies" : {
+    "mocha" : ""
+  },  
   "scripts": {
     "test": "mocha"
   },
